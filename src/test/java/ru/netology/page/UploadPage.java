@@ -23,7 +23,7 @@ public class UploadPage {
     }
 
     public DashboardPage shouldTransferBetweenCards(int amount, String cardFrom) {
-        amountField.doubleClick().sendKeys(Keys.DELETE);
+        amountField.doubleClick().sendKeys(Keys.chord(Keys.CONTROL, "a") + Keys.DELETE);
         amountField.setValue(String.valueOf(amount));
         fromField.sendKeys(Keys.chord(Keys.CONTROL, "a") + Keys.DELETE);
         fromField.setValue(cardFrom);
@@ -32,7 +32,7 @@ public class UploadPage {
     }
 
     public void shouldErrorTransferAmountIsOutOfLimit(int amount, String cardFrom) {
-        amountField.doubleClick().sendKeys(Keys.DELETE);
+        amountField.sendKeys(Keys.chord(Keys.CONTROL, "a") + Keys.DELETE);
         amountField.setValue(String.valueOf(amount));
         fromField.sendKeys(Keys.chord(Keys.CONTROL, "a") + Keys.DELETE);
         fromField.setValue(cardFrom);

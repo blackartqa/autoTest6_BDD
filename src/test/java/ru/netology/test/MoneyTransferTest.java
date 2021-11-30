@@ -40,27 +40,8 @@ public class MoneyTransferTest {
         val badVerificationCode = DataHelper.getOtherVerificationCodeFor(authInfo);
         verificationPage.invalidVerify(badVerificationCode);
     }
-
     @Test
-    void shouldFailToTransferMoneyFromFirstCardToSecondIfOutOfLimit() {
-        val dashboardPage = validAuthorization();
-        val cardPlusFull = DataHelper.findCardPlus();
-        val cardMinusFull = DataHelper.findCardMinus(cardPlusFull);
-        val initialBalanceCardPlus = dashboardPage.getCardsBalance(DataHelper.getLastDigits(cardPlusFull));
-        val initialBalanceCardMinus = dashboardPage.getCardsBalance(DataHelper.getLastDigits(cardMinusFull));
-        val uploadAmount = DataHelper.generateTransferAmountOutLimit(initialBalanceCardMinus);
-        val uploadPage = dashboardPage.moneyTransferButton(DataHelper.getLastDigits(cardPlusFull));
-        uploadPage.shouldErrorTransferAmountIsOutOfLimit(uploadAmount, cardMinusFull);
-        setUp();
-        val dashboardPage2 = validAuthorization();
-        val actualBalanceCardPlus = dashboardPage2.getCardsBalance(DataHelper.getLastDigits(cardPlusFull));
-        val actualBalanceCardMinus = dashboardPage2.getCardsBalance(DataHelper.getLastDigits(cardMinusFull));
-        assertEquals(initialBalanceCardPlus, actualBalanceCardPlus);
-        assertEquals(initialBalanceCardMinus, actualBalanceCardMinus);
-    }
-
-    @Test
-    void shouldTransferMoneyBetweenRandomCardsWithinLimit() {
+    void shouldTransferBetweenCardsWithLimit() {
         val dashboardPage = validAuthorization();
         val cardPlusFull = DataHelper.findCardPlus();
         val cardMinusFull = DataHelper.findCardMinus(cardPlusFull);
@@ -80,7 +61,23 @@ public class MoneyTransferTest {
         assertEquals(initialBalanceCardPlus, dashboardPage3.getCardsBalance(DataHelper.getLastDigits(cardPlusFull)));
         assertEquals(initialBalanceCardMinus, dashboardPage3.getCardsBalance(DataHelper.getLastDigits(cardMinusFull)));
     }
-
+    @Test
+    void shouldErrorTransferOutOfLimit() {
+        val dashboardPage = validAuthorization();
+        val cardPlusFull = DataHelper.findCardPlus();
+        val cardMinusFull = DataHelper.findCardMinus(cardPlusFull);
+        val initialBalanceCardPlus = dashboardPage.getCardsBalance(DataHelper.getLastDigits(cardPlusFull));
+        val initialBalanceCardMinus = dashboardPage.getCardsBalance(DataHelper.getLastDigits(cardMinusFull));
+        val uploadAmount = DataHelper.generateTransferAmountOutLimit(initialBalanceCardMinus);
+        val uploadPage = dashboardPage.moneyTransferButton(DataHelper.getLastDigits(cardPlusFull));
+        uploadPage.shouldErrorTransferAmountIsOutOfLimit(uploadAmount, cardMinusFull);
+        setUp();
+        val dashboardPage2 = validAuthorization();
+        val actualBalanceCardPlus = dashboardPage2.getCardsBalance(DataHelper.getLastDigits(cardPlusFull));
+        val actualBalanceCardMinus = dashboardPage2.getCardsBalance(DataHelper.getLastDigits(cardMinusFull));
+        assertEquals(initialBalanceCardPlus, actualBalanceCardPlus);
+        assertEquals(initialBalanceCardMinus, actualBalanceCardMinus);
+    }
 
 //    @Test
 //    void shouldTransferMoneyBetweenOwnCardsV1() {
