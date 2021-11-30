@@ -30,6 +30,7 @@ public class UploadPage {
         uploadButton.click();
         return new DashboardPage();
     }
+
     public void shouldErrorTransferAmountIsOutOfLimit(int amount, String cardFrom) {
         amountField.doubleClick().sendKeys(Keys.DELETE);
         amountField.setValue(String.valueOf(amount));

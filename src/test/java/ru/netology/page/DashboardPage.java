@@ -19,7 +19,8 @@ public class DashboardPage {
         heading.shouldBe(visible);
 
     }
-//        public int getFirstCardBalance(){
+
+    //        public int getFirstCardBalance(){
 //        val text = cards.get(1).getText();
 //        return extractBalance(text);
 //    }

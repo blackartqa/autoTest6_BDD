@@ -16,6 +16,7 @@ public class MoneyTransferTest {
     void setUp() {
         open("http://localhost:9999");
     }
+
     private DashboardPage validAuthorization() {
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getAuthInfo();
@@ -57,6 +58,7 @@ public class MoneyTransferTest {
         assertEquals(initialBalanceCardPlus, actualBalanceCardPlus);
         assertEquals(initialBalanceCardMinus, actualBalanceCardMinus);
     }
+
     @Test
     void shouldTransferMoneyBetweenRandomCardsWithinLimit() {
         val dashboardPage = validAuthorization();

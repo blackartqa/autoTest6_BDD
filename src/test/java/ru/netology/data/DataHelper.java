@@ -36,7 +36,9 @@ public class DataHelper {
         return new VerificationCode("12345");
     }
 
-    public static VerificationCode getOtherVerificationCodeFor(AuthInfo authInfo) { return new VerificationCode("67890"); }
+    public static VerificationCode getOtherVerificationCodeFor(AuthInfo authInfo) {
+        return new VerificationCode("67890");
+    }
 
     @Value
     public static class CardNumber {

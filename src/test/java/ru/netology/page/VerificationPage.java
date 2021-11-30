@@ -22,6 +22,7 @@ public class VerificationPage {
         verifyButton.click();
         return new DashboardPage();
     }
+
     public void invalidVerify(DataHelper.VerificationCode verificationCode) {
         codeField.setValue(verificationCode.getCode());
         verifyButton.click();
